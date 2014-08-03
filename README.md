@@ -40,6 +40,16 @@ You need to use the `django.template.loaders.eggs.Loader` template loader if you
 At the end of your `settings.py` :
 
 ```python
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+    'django.template.loaders.eggs.Loader',
+)
+```
+
+or
+
+```python
 TEMPLATE_LOADERS += (
     'django.template.loaders.eggs.Loader',
 )
