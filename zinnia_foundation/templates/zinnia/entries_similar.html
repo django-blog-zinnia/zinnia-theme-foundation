@@ -1,0 +1,11 @@
+{% load i18n %}
+<ul class="no-bullet">
+  {% for entry in entries %}
+  <li>
+  </li>
+  {% empty %}
+  <li>
+    {% trans "No similar entries." %}
+  </li>
+  {% endfor %}
+</ul>

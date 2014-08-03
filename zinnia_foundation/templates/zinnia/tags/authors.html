@@ -1,0 +1,15 @@
+{% load i18n %}
+<ul class="no-bullet">
+  {% for author in authors %}
+  <li>
+    <a href="{{ author.get_absolute_url }}"
+       title="{% blocktrans %}Show all {{ author }}'s entries{% endblocktrans %}"
+       class="fn url{% if not author.get_full_name %} nickname{% endif %}">{{ author }}</a>
+    {% blocktrans count entry_count=author.count_entries_published %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
+  </li>
+  {% empty %}
+  <li>
+    {% trans "No authors yet." %}
+  </li>
+  {% endfor %}
+</ul>

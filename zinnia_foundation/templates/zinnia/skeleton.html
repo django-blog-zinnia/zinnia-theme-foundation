@@ -1,0 +1,145 @@
+{% load i18n staticfiles %}
+<!doctype html>
+<html class="no-js" lang="{{ LANGUAGE_CODE }}">
+  <head>
+    <title>Zinnia's Weblog - {% block title %}{% endblock title %}{% block title-page %}{% endblock title-page %}</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="cache-control" content="public" />
+    <meta name="robots" content="follow, all" />
+    <meta name="language" content="{{ LANGUAGE_CODE }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="{% block meta-description %}{% trans "Just another Zinnia weblog." %}{% endblock meta-description %}{% block meta-description-page %}{% endblock meta-description-page %}" />
+    <meta name="keywords" content="{% block meta-keywords %}django, blog, weblog, zinnia{% endblock meta-keywords %}" />
+    <meta name="author" content="Fantomas42" />
+    {% block meta %}{% endblock meta %}
+    <link rel="pingback" href="/xmlrpc/" />
+    <link rel="shortcut icon" href="{% static "zinnia/img/favicon.ico" %}" />
+    <link rel="home" href="{% url 'zinnia_entry_archive_index' %}" />
+    <link rel="stylesheet" href="{% static "zinnia/css/foundation.css" %}" />
+    <link rel="stylesheet" href="{% static "zinnia/icons/foundation-icons.css" %}" />
+    <script src="{% static "zinnia/js/vendor/modernizr.js" %}"></script>
+    <style>
+      /* Foundation fixs for Zinnia blog */
+      .entries-calendar td, .no-entries-calendar td { background: #fff; text-align: center; }
+      .entries-calendar th, .no-entries-calendar th { text-align: center; }
+      .entries-calendar, .no-entries-calendar { table-layout: fixed; width: 100%; }
+      td.entry { background: #f5f5f5 }
+      .top-bar { margin-bottom: 15px }
+      .tag-2 { font-size: 1.4em }
+      .tag-3 { font-size: 1.8em }
+      .tag-4 { font-size: 2.2em }
+      .tag-5 { font-size: 2.6em }
+      .tag-6 { font-size: 3em }
+      #input-search-top { height: 1.8rem }
+      #zinnia-slogan { display: block; margin-top: 10px; }
+    </style>
+    {% block link %}{% endblock link %}
+    {% block script %}{% endblock script %}
+  </head>
+  <body class="zinnia {% block theme-class %}default{% endblock theme-class %} {% block color-class %}blue{% endblock color-class %} {% block sidebar-class %}right-sidebar{% endblock sidebar-class %} {% block body-class %}{% endblock body-class %}">
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1>
+            <a href="{% url 'zinnia_entry_archive_index' %}" title="Zinnia's Weblog" rel="home">
+              Zinnia's Weblog      
+            </a>
+          </h1>
+        </li>
+        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <li class="toggle-topbar menu-icon">
+          <a href="#">
+            <span>Menu</span>
+          </a>
+        </li>
+      </ul>
+      <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+          <li class="has-form">
+            <form method="get" action="{% url 'zinnia_entry_search' %}">
+              <div class="row collapse">
+                <div class="large-8 small-9 columns">
+                  <input id="input-search-top" type="text" name="pattern" placeholder="{% trans "Keywords..." %}" {% if pattern %}value="{{ pattern }}"{% endif %} />
+                </div>
+                <div class="large-4 small-3 columns">
+                  <input type="submit" class="alert button expand" value="OK" />
+                </div>
+              </div>
+            </form>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="{% url 'zinnia_sitemap' %}" title="{% trans "Sitemap" %}" class="sitemap">
+              <i class="fi-map"></i>
+              {% trans "Sitemap" %}
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="{% url 'zinnia_entry_latest_feed' %}" title="{% trans "RSS Feed of latest entries" %}" class="feeds">
+            <i class="fi-rss"></i>
+            {% trans "RSS Feed" %}
+            </a>
+          </li>
+        </ul>
+      </section>
+    </nav>
+    <div class="row">
+      <div class="large-12 columns">
+        <h2>Zinnia's Weblog <small id="zinnia-slogan">{% trans "Just another Zinnia weblog." %}</small></h2>
+        <hr>
+        {% block breadcrumbs %}{% endblock breadcrumbs %}
+      </div>
+    </div>
+    {% block slider %}{% endblock slider %} <!-- TODO -->
+    <div class="row">
+      <div class="large-8 small-12 columns" id="content">
+        {% block content %}
+          <div class="links">
+            <h3>{% trans "Useful links" %}</h3>
+            <ul>
+              <li>
+                <a href="{% url 'zinnia_entry_archive_index' %}" title="{% trans "Weblog index" %}">
+                  {% trans "Weblog index" %}
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'zinnia_sitemap' %}" title="{% trans "Sitemap" %}">
+                  {% trans "Sitemap" %}
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="search">
+            <h3>{% trans "Search" %}</h3>
+            {% include "zinnia/tags/search_form.html" %}
+          </div>
+        {% endblock content %}
+      </div>
+      <div class="large-4 small-12 columns panel" id="sidebar">
+        {% block sidebar %}
+        {% endblock sidebar %}
+      </div>
+    </div>
+    <footer class="row">
+      <div class="small-12 columns">
+        <hr>
+        <p>
+          {% blocktrans %}
+            Powered by <a href="http://www.djangoproject.com">Django</a> and <a href="https://github.com/Fantomas42/django-blog-zinnia">Zinnia {{ ZINNIA_VERSION }}</a>.
+          {% endblocktrans %}
+          <br/>
+          <a href="http://foundation.zurb.com">Zurb Foundation</a> theme by <a href="https://github.com/gustavi/zinnia-theme-foundation">gustavi</a>.
+        </p>
+      </div>
+    </footer>
+    <script src="{% static "zinnia/js/vendor/jquery.js" %}"></script>
+    <script src="{% static "zinnia/js/foundation.min.js" %}"></script>
+    <script>
+      $(document).foundation();
+      var doc = document.documentElement;
+      doc.setAttribute('data-useragent', navigator.userAgent);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+{% load i18n staticfiles %}
+<form method="get" id="searchform" action="{% url 'zinnia_entry_search' %}">
+  <div class="row collapse">
+    <div class="small-10 columns">
+      <input type="text" name="pattern" id="searchbox" placeholder="{% trans "Keywords..." %}" {% if pattern %}value="{{ pattern }}"{% endif %} />
+    </div>
+    <div class="small-2 columns">
+      <input type="submit" class="button tiny expand" value="OK" />
+    </div>
+  </div>
+</form>
+<div data-alert class="alert-box info">
+  {% trans 'You can use - to exclude words or phrases, &quot;double quotes&quot; for exact phrases and the AND/OR boolean operators combined with parenthesis for complex queries.' %}
+</div>

@@ -1,0 +1,21 @@
+<ul class="breadcrumbs">
+  {% for crumb in breadcrumbs %}
+    {% if forloop.last %}
+      <li class="current">
+        {{ crumb.name }}
+      </li>
+    {% else %}
+      {% if crumb.url %}
+        <li>
+          <a href="{{ crumb.url }}" title="{{ crumb.name }}">
+            {{ crumb.name }}
+          </a>
+        </li>
+      {% else %}
+        <li class="unavailable">
+          {{ crumb.name }}
+        </li>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+</ul>

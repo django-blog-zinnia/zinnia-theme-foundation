@@ -1,0 +1,5 @@
+*~
+*.pyc
+build
+dist
+zinnia_theme_foundation.egg-info

@@ -1,0 +1,14 @@
+{% load i18n %}
+{% for tag in tags %}
+  <span class="label">
+    <a href="{% url 'zinnia_tag_detail' tag.name %}"
+       title="{% blocktrans count entry_count=tag.count %}{{ entry_count }} entry tagged by {{ tag }}{% plural %}{{ entry_count }} entries tagged by {{ tag }}{% endblocktrans %}"
+       class="tag-{{ tag.font_size }}{% if tag.name == context_tag.name %} current{% endif %}"
+       style="color: #fff;"
+     >{{ tag }}</a>
+  </span>
+{% empty %}
+  <p>
+    {% trans "No tags yet." %}
+  </p>
+{% endfor %}
