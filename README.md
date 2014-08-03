@@ -19,7 +19,7 @@ pip install zinnia-theme-foundation
 If you want the dev version :
 
 ```
-pip install pip install git+git://github.com/gustavi/zinnia-theme-foundation.git
+pip install git+git://github.com/gustavi/zinnia-theme-foundation.git
 ```
 
 ### Add the theme in django
