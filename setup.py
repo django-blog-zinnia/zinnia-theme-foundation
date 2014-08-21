@@ -8,7 +8,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name = 'zinnia-theme-foundation',
-    version = '1.0',
+    version = '1.0.1',
     packages = ['zinnia_foundation'],
     include_package_data = True,
     license = 'GPL',
