@@ -14,7 +14,7 @@
     {% block meta %}{% endblock meta %}
     <link rel="pingback" href="/xmlrpc/" />
     <link rel="shortcut icon" href="{% static "zinnia/img/favicon.ico" %}" />
-    <link rel="home" href="{% url 'zinnia_entry_archive_index' %}" />
+    <link rel="home" href="{% url 'zinnia:entry_archive_index' %}" />
     <link rel="stylesheet" href="{% static "zinnia/css/foundation.css" %}" />
     <link rel="stylesheet" href="{% static "zinnia/icons/foundation-icons.css" %}" />
     <script src="{% static "zinnia/js/vendor/modernizr.js" %}"></script>
@@ -42,7 +42,7 @@
       <ul class="title-area">
         <li class="name">
           <h1>
-            <a href="{% url 'zinnia_entry_archive_index' %}" title="Zinnia's Weblog" rel="home">
+            <a href="{% url 'zinnia:entry_archive_index' %}" title="Zinnia's Weblog" rel="home">
               Zinnia's Weblog      
             </a>
           </h1>
@@ -58,7 +58,7 @@
         <!-- Right Nav Section -->
         <ul class="right">
           <li class="has-form">
-            <form method="get" action="{% url 'zinnia_entry_search' %}">
+            <form method="get" action="{% url 'zinnia:entry_search' %}">
               <div class="row collapse">
                 <div class="large-8 small-9 columns">
                   <input id="input-search-top" type="text" name="pattern" placeholder="{% trans "Keywords..." %}" {% if pattern %}value="{{ pattern }}"{% endif %} />
@@ -71,14 +71,14 @@
           </li>
           <li class="divider"></li>
           <li>
-            <a href="{% url 'zinnia_sitemap' %}" title="{% trans "Sitemap" %}" class="sitemap">
+            <a href="{% url 'zinnia:sitemap' %}" title="{% trans "Sitemap" %}" class="sitemap">
               <i class="fi-map"></i>
               {% trans "Sitemap" %}
             </a>
           </li>
           <li class="divider"></li>
           <li>
-            <a href="{% url 'zinnia_entry_latest_feed' %}" title="{% trans "RSS Feed of latest entries" %}" class="feeds">
+            <a href="{% url 'zinnia:entry_latest_feed' %}" title="{% trans "RSS Feed of latest entries" %}" class="feeds">
             <i class="fi-rss"></i>
             {% trans "RSS Feed" %}
             </a>
@@ -101,12 +101,12 @@
             <h3>{% trans "Useful links" %}</h3>
             <ul>
               <li>
-                <a href="{% url 'zinnia_entry_archive_index' %}" title="{% trans "Weblog index" %}">
+                <a href="{% url 'zinnia:entry_archive_index' %}" title="{% trans "Weblog index" %}">
                   {% trans "Weblog index" %}
                 </a>
               </li>
               <li>
-                <a href="{% url 'zinnia_sitemap' %}" title="{% trans "Sitemap" %}">
+                <a href="{% url 'zinnia:sitemap' %}" title="{% trans "Sitemap" %}">
                   {% trans "Sitemap" %}
                 </a>
               </li>
