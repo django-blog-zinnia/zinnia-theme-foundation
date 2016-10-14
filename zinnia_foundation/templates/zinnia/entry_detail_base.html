@@ -1,36 +1,7 @@
-{% extends "zinnia/base.html" %}
-{% load i18n comments zinnia %}
-{% load cycle from future %}
-
-{% block title %}{{ object.title }}{% endblock title %}
-
-{% block meta-description %}{{ object.excerpt|safe }}{% endblock meta-description %}
-
-{% block meta-keywords %}{% if object.tags %}{{ object.tags }}{% else %}{{ block.super }}{% endif %}{% endblock meta-keywords %}
-
-{% block link %}
-  {{ block.super }}
-  {% with previous_entry=object.previous_entry %}{% if previous_entry %}
-  <link rel="prev" title="{{ previous_entry.title }}" href="{{ previous_entry.get_absolute_url }}" />
-  {% endif %}{% endwith %}
-  {% with next_entry=object.next_entry %}{% if next_entry %}
-  <link rel="next" title="{{ next_entry.title }}" href="{{ next_entry.get_absolute_url }}" />
-  {% endif %}{% endwith %}
-  <link rel="shortlink" href="{{ object.short_url }}" />
-  <link rel="canonical" href="{{ object.get_absolute_url }}" />
-  {% with year=object.creation_date|date:"Y" month=object.creation_date|date:"m" day=object.creation_date|date:"d" %}
-  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of discussions on" %} '{{ object.title }}'"
-        href="{% url 'zinnia:entry_discussion_feed' year month day object.slug %}" />
-  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of comments on" %} '{{ object.title }}'"
-        href="{% url 'zinnia:entry_comment_feed' year month day object.slug %}" />
-  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of pingbacks on" %} '{{ object.title }}'"
-        href="{% url 'zinnia:entry_pingback_feed' year month day object.slug %}" />
-  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of trackbacks on" %} '{{ object.title }}'"
-        href="{% url 'zinnia:entry_trackback_feed' year month day object.slug %}" />
-  {% endwith %}
-{% endblock link %}
-
-{% block body-class %}entry entry-{{ object.pk }}{% if object.featured %} featured{% endif %} year-{{ object.creation_date|date:"Y" }} month-{{ object.creation_date|date:"m" }} week-{{ object.creation_date|date:"W" }} day-{{ object.creation_date|date:"d" }}{% endblock body-class %}
+{% extends "zinnia:zinnia/entry_detail_base.html" %}
+{% load i18n %}
+{% load comments %}
+{% load zinnia %}
 
 {% block content %}
 
@@ -104,7 +75,7 @@
   {% block pingbacks-loop %}
   <ul id="pingback-list" class="no-bullet">
     {% for pingback in pingback_list %}
-    <li id="pingback-{{ pingback.pk }}" class="pingback vcard {% cycle box1,box2 %}">
+    <li id="pingback-{{ pingback.pk }}" class="pingback vcard {% cycle 'box1' 'box2' %}">
       {% block pingback-info %}
       <p class="pingback-info">
 	<a href="{{ pingback.url }}" rel="external nofollow"
@@ -148,7 +119,7 @@
   {% block trackbacks-loop %}
   <ol id="trackback-list">
     {% for trackback in trackback_list %}
-    <li id="trackback-{{ trackback.pk }}" class="trackback vcard {% cycle box1,box2 %}">
+    <li id="trackback-{{ trackback.pk }}" class="trackback vcard {% cycle 'box1' 'box2' %}">
       {% block trackback-info %}
       <p class="trackback-info">
 	<a href="{{ trackback.url }}" rel="external nofollow"
@@ -195,7 +166,7 @@
   <ul class="no-bullet" id="comment-list">
     {% for comment in comment_list %}
     <li id="comment-{{ comment.pk }}-by-{{ comment.user_name|slugify }}"
-        class="comment panel {% cycle box1,box2 %}{% if comment.user %} authenticated-comment{% if comment.user.is_staff %} staff-comment{% endif %}{% if comment.user.is_superuser %} superuser-comment{% endif %}{% endif %}">
+        class="comment panel {% cycle 'box1' 'box2' %}{% if comment.user %} authenticated-comment{% if comment.user.is_staff %} staff-comment{% endif %}{% if comment.user.is_superuser %} superuser-comment{% endif %}{% endif %}">
       {% block comment-image %}
       <img src="{% get_gravatar comment.email 60 "G" %}"
            class="gravatar photo" alt="{{ comment.name }}" />

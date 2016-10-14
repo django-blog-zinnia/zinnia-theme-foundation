@@ -1,15 +1,5 @@
-{% extends "zinnia/entry_list.html" %}
-{% load i18n zinnia %}
-
-{% block meta-description %}{% trans "Latest entries" %}{% endblock meta-description %}
-
-{% block title %}{% trans "Latest entries" %}{% endblock title %}
-
-{% block body-class %}{{ block.super }} archive index {% now "\y\e\a\r-Y \m\o\n\t\h-m \w\e\ek-W \d\a\y-d" %}{% endblock body-class %}
-
-{% block slider %}
-{% get_featured_entries template="zinnia/tags/entries_slider.html" %}
-{% endblock slider %}
+{% extends "zinnia:zinnia/entry_archive.html" %}
+{% load i18n %}
 
 {% block content-related %}
 {% if date_list %}
