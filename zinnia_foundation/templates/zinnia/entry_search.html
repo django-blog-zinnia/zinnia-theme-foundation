@@ -1,19 +1,9 @@
-{% extends "zinnia/entry_list.html" %}
-{% load i18n zinnia %}
-
-{% block title %}{% trans "Search results for" %} '{{ pattern }}'{% endblock title %}
-
-{% block meta-description %}{% trans "Search results for" %} '{{ pattern }}'{% endblock meta-description %}
-
-{% block link %}
-  {{ block.super }}
-  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of search result of" %} '{{ pattern }}'" href="{% url 'zinnia:entry_search_feed' %}?pattern={{ pattern }}" />
-{% endblock link %}
-
-{% block body-class %}{{ block.super }} search {% if object_list %}search-results{% else %}search-no-results{% endif %}{% endblock body-class %}
+{% extends "zinnia:zinnia/entry_search.html" %}
+{% load i18n %}
+{% load zinnia %}
 
 {% block content-title %}
-<h1>{% trans "Search results for" %} '{{ pattern }}'</h1>
+<h1>{% blocktrans %}Search results for '{{ pattern }}'{% endblocktrans %}</h1>
 
 {% if error %}
   <div data-alert class="alert-box alert">
@@ -31,7 +21,8 @@
 {% block content-loop %}
 {% if not error %}
 {% for object in object_list %}
-  {% include object.content_template with object_content=object.html_preview continue_reading=1 %}
+  {% zinnia_loop_template object.content_template as template %}
+  {% include template with object_content=object.html_preview continue_reading=1 %}
 {% empty %}
   <div data-alert class="alert-box warning">
     {% trans "Nothing found." %}
@@ -39,9 +30,3 @@
 {% endfor %}
 {% endif %}
 {% endblock content-loop %}
-
-{% block content-related %}
-<div class="search">
-  {% include "zinnia/tags/search_form.html" %}
-</div>
-{% endblock content-related %}
