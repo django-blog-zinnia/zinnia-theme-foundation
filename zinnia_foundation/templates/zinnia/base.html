@@ -1,29 +1,9 @@
-{% extends "zinnia/skeleton.html" %}
-{% load zinnia i18n %}
-
-{% block meta-keywords %}{% get_tags as entry_tags %}{{ entry_tags|join:", "}}{% endblock meta-keywords %}
-
-{% block meta %}
-    <meta name="generator" content="Zinnia {{ ZINNIA_VERSION }}" />
-{% endblock meta %}
-
-{% block link %}
-    <link rel="index" href="{% url 'zinnia:entry_archive_index' %}" />
-    <link rel="author" type="text/plain" href="{% url 'zinnia:humans' %}" />
-    <link rel="EditURI" type="application/rsd+xml" href="{% url 'zinnia:rsd' %}" />
-    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="{% url 'zinnia:wlwmanifest' %}" />
-    <link rel="search" type="application/opensearchdescription+xml" title="Zinnia's Blog" href="{% url 'zinnia:opensearch' %}" />
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest entries" %}" href="{% url 'zinnia:entry_latest_feed' %}" />
-    <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of latest discussions" %}" href="{% url 'zinnia:discussion_latest_feed' %}" />
-    {% get_archives_entries "zinnia/tags/entries_archives_link.html" %}
-{% endblock link %}
-
-{% block breadcrumbs %}
-  {% zinnia_breadcrumbs %}
-{% endblock breadcrumbs %}
+{% extends "zinnia:zinnia/base.html" %}
+{% load i18n %}
+{% load zinnia %}
 
 {% block sidebar %}
-<div id="widget-welcome" class="widget">
+<aside id="widget-welcome" class="widget">
   <h4>{% trans "Welcome!" %}</h4>
   <p>
     {% trans "This simple theme is the Zurb Foundation theme for Zinnia." %}
@@ -32,62 +12,62 @@
     {% trans "Don't hesitate to override the template <strong>zinnia/base.html</strong> to start <a href='http://docs.django-blog-zinnia.com/en/latest/how-to/customize_look_and_feel.html'>customizing your Weblog</a>." %}
   </p>
   <p>
-    You can also change the design with Sass. Learn more in the <a href="https://github.com/gustavi/zinnia-theme-foundation">Zinnia Foundation repo</a>.
+    You can also change the design with Sass. Learn more in the <a href="https://github.com/django-blog-zinnia/zinnia-theme-foundation">Zinnia Foundation repo</a>.
   </p>
-</div>
+</aside>
 <hr>
-<div id="widget-categories" class="widget">
+<aside id="widget-categories" class="widget">
   <h4>{% trans "Categories" %}</h4>
   {% get_categories %}
-</div>
+</aside>
 <hr>
-<div id="widget-authors" class="widget">
+<aside id="widget-authors" class="widget">
   <h4>{% trans "Authors" %}</h4>
   {% get_authors %}
-</div>
+</aside>
 <hr>
-<div id="widget-calendar" class="widget">
+<aside id="widget-calendar" class="widget">
   <h4>{% trans "Calendar" %}</h4>
   {% get_calendar_entries %}
-</div>
+</aside>
 <hr>
-<div id="widget-tags" class="widget">
+<aside id="widget-tags" class="widget">
   <h4>{% trans "Tags" %}</h4>
   {% get_tag_cloud %}
-</div>
+</aside>
 <hr>
-<div id="widget-recents" class="widget">
+<aside id="widget-recents" class="widget">
   <h4>{% trans "Recent entries" %}</h4>
   {% get_recent_entries %}
-</div>
+</aside>
 <hr>
-<div id="widget-comments" class="widget">
+<aside id="widget-comments" class="widget">
   <h4>{% trans "Recent comments" %}</h4>
   {% get_recent_comments %}
-</div>
+</aside>
 <hr>
-<div id="widget-linkbacks" class="widget">
+<aside id="widget-linkbacks" class="widget">
   <h4>{% trans "Recent linkbacks" %}</h4>
   {% get_recent_linkbacks %}
-</div>
+</aside>
 <hr>
-<div id="widget-randoms" class="widget">
+<aside id="widget-randoms" class="widget">
   <h4>{% trans "Random entries" %}</h4>
   {% get_random_entries %}
-</div>
+</aside>
 <hr>
-<div id="widget-populars" class="widget">
+<aside id="widget-populars" class="widget">
   <h4>{% trans "Popular entries" %}</h4>
   {% get_popular_entries %}
-</div>
+</aside>
 <hr>
-<div id="widget-archives" class="widget">
+<aside id="widget-archives" class="widget">
   <h4>{% trans "Archives" %}</h4>
   {% get_archives_entries_tree %}
-</div>
+</aside>
 {% if user.is_authenticated %}
 <hr>
-<div id="widget-tools" class="widget">
+<aside id="widget-tools" class="widget">
   <h4>{% trans "Tools" %}</h4>
   <ul class="no-bullet">
     {% if perms.zinnia %}
@@ -115,6 +95,6 @@
       </a>
     </li>
   </ul>
-</div>
+</aside>
 {% endif %}
 {% endblock sidebar %}
