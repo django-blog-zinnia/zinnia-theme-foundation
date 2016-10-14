@@ -2,4 +2,5 @@
 *.pyc
 build
 dist
+django-apps-src
 zinnia_theme_foundation.egg-info
