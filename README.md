@@ -60,13 +60,6 @@ TEMPLATES = [
 ]
 ```
 
-or
-
-```python
-TEMPLATE_LOADERS += (
-    'django.template.loaders.eggs.Loader',
-)
-```
 
 Your theme is ready to use !
 
