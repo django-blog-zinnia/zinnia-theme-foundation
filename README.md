@@ -19,7 +19,7 @@ pip install zinnia-theme-foundation
 If you want the dev version :
 
 ```
-pip install git+git://github.com/gustavi/zinnia-theme-foundation.git
+pip install git+git://github.com/django-blog-zinnia/zinnia-theme-foundation.git
 ```
 
 ### Add the theme in django
@@ -35,16 +35,29 @@ INSTALLED_APPS = (
 )
 ```
 
-You need to use the `django.template.loaders.eggs.Loader` template loader if you have installed the package as an egg.
+You need to use the https://pypi.python.org/pypi/django-app-namespace-template-loader package for loading the templates.
 
 At the end of your `settings.py` :
 
 ```python
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-    'django.template.loaders.eggs.Loader',
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'OPTIONS': {
+            'loaders': [
+                'app_namespace.Loader',
+                'django.template.loaders.app_directories.Loader',
+            ],
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.request',
+                'django.contrib.messages.context_processors.messages',
+                'zinnia.context_processors.version',
+            ]
+        }
+    }
+]
 ```
 
 or
